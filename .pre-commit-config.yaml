@@ -55,3 +55,14 @@ repos:
     rev: v3.1.0
     hooks:
       - id: setup-cfg-fmt
+#  # Запуск тестов
+#  # Для pytest используйте хук через скрипт, а не как репозиторий
+#  - repo: local
+#    hooks:
+#      - id: pytest
+#        name: pytest
+#        entry: pytest
+#        language: system
+#        types: [python]
+#        args: [--cov=src, --cov-report=html]
+#        pass_failures: true

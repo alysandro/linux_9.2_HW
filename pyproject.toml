@@ -11,6 +11,7 @@ python = "^3.12"
 
 # Группа зависимостей для линтинга (dev-зависимости)
 poetry-core = ">=2.0.0"
+covdefaults = "^2.3.0"
 [tool.poetry.group.lint.dependencies]
 black = ">=25.11.0,<26.0.0"
 flake8 = ">=7.3.0,<8.0.0"
