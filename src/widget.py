@@ -67,7 +67,7 @@ def get_date(date_string: str) -> str:
 
     # Переставляем элементы в порядке ДД, ММ, ГГГГ через срезы (реверсивно, но с перестановкой) parts[2] — день,
     # parts[1] — месяц, parts[0] — год
-    formatted_date = f'"ДД.ММ.ГГГГ" ( "{parts[2]}.{parts[1]}.{parts[0]}" ) '
+    formatted_date = f'"ДД.ММ.ГГГГ" - ("{parts[2]}.{parts[1]}.{parts[0]}")'
 
     return formatted_date
 
