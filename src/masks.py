@@ -20,7 +20,9 @@ def get_mask_card_number(card: str) -> str:
 
 # Пример использования
 card = '4532 1234 5678 9012'
+card1 = '1235 45584 54555'
 print(get_mask_card_number(card))
+print(get_mask_card_number(card1))
 
 
 #     Функцию маскировки номера банковского счета
