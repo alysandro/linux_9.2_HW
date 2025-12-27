@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "linux-9-1-hw"
+name = "linux-9-2-hw"
 version = "0.1.0"
 description = ""
 authors = ["ALEXANDR_SH <sandro.86@bk.ru>"]
@@ -16,6 +16,10 @@ black = ">=25.11.0,<26.0.0"
 flake8 = ">=7.3.0,<8.0.0"
 isort = ">=7.0.0,<8.0.0"
 mypy = ">=1.19.0,<2.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.2"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -91,3 +95,8 @@ warn_return_any = false
 
 [tool.poetry.scripts]
 lint = "scripts.lint:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "test_*.py"]
+python_functions = ["test*"]
