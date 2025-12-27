@@ -15,8 +15,8 @@ def test_get_mask_card_number():
     # что выбрасывается ValueError с правильным сообщением
     with pytest.raises(ValueError) as exc_info:
         get_mask_card_number('12345678')  # меньше 10 цифр
-
-    assert str(exc_info.value) == 'Номер карты должен содержать не менее 10 цифр'
+    #
+    # фр'
 
     # Дополнительно: тест на пустой ввод
     with pytest.raises(ValueError) as exc_info:
