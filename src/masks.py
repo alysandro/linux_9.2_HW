@@ -22,12 +22,12 @@ def get_mask_card_number(card: str) -> str:
 
 
 # Пример использования
-card = '4532 1234 5678 9012'
-card1 = '1235 45584 54555'
-card3 = '12345678'
-card4 = ''
-print(get_mask_card_number(card))
-print(get_mask_card_number(card1))
+# card = '4532 1234 5678 9012'
+# card1 = '1235 45584 54555'
+# card3 = '12345678'
+# card4 = ''
+# print(get_mask_card_number(card))
+# print(get_mask_card_number(card1))
 # print(get_mask_card_number(card3))
 # print(get_mask_card_number(card4))
 
@@ -39,5 +39,5 @@ def get_mask_account(acc_number: str) -> str:
     return mask_account
 
 
-acc_number = '15326548995852688589569'
-print(get_mask_account(acc_number))
+# acc_number = '15326548995852688589569'
+# print(get_mask_account(acc_number))
