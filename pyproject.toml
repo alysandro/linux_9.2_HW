@@ -1,103 +1,113 @@
-[tool.poetry]
+[project]
+# Основные метаданные проекта (стандарт PEP 621)
 name = "linux-9-2-hw"
 version = "0.1.0"
-description = ""
-authors = ["ALEXANDR_SH <sandro.86@bk.ru>"]
+description = "Домашнее задание по курсу Linux"
+authors = [{ name = "ALEXANDR_SH", email = "sandro.86@bk.ru" }]
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [] # Основные зависимости приложения (библиотеки)
+
+[tool.poetry]
+# Настройки специфичные для пакетного менеджера Poetry
 packages = [{ include = "src" }]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-
-# Группа зависимостей для линтинга (dev-зависимости)
-poetry-core = ">=2.0.0"
-covdefaults = "^2.3.0"
 [tool.poetry.group.lint.dependencies]
-black = ">=25.11.0,<26.0.0"
-flake8 = ">=7.3.0,<8.0.0"
-isort = ">=7.0.0,<8.0.0"
-mypy = ">=1.19.0,<2.0.0"
-
+# Инструменты для проверки качества кода и типов
+ruff = "^0.9.2"    # Заменяет Black, isort и Flake8 (быстрый линтер на Rust)
+mypy = "^1.14.0"   # Статический анализатор типов
 
 [tool.poetry.group.dev.dependencies]
+# Зависимости для разработки и тестирования
 pytest = "^9.0.2"
+covdefaults = "^2.3.0"
+pytest-cov = "^6.0.0" # Добавьте это (актуальная версия на 2026)
+poethepoet = "^0.40.0"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+# Настройки сборки пакета
+requires = ["poetry-core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-
-[tool.black]
+[tool.ruff]
+# Глобальные настройки Ruff (аналог настроек Black и Flake8)
 line-length = 119
-target-version = ['py38', 'py39', 'py310', 'py311']
-skip-string-normalization = true
-exclude = '''
-/(
-    \.git
-  | \.mypy_cache
-  | \.pytest_cache
-  | \.venv
-  | build
-  | dist
-)/
-'''
+target-version = "py312"
 
-[tool.isort]
-profile = "black"
-line_length = 119
-skip = [
-    ".venv",
-    ".mypy_cache",
-    ".pytest_cache",
-    "build",
-    "dist"
+[tool.ruff.lint]
+# Настройки правил линтера
+# E, W - ошибки и предупреждения стиля (pycodestyle)
+# F - ошибки логики (pyflakes)
+# I - сортировка импортов (isort)
+# B - поиск вероятных багов (bugbear)
+# UP - обновление синтаксиса до версии 3.12+ (pyupgrade)
+select  = [
+    "E",   # pycodestyle (ошибки стиля: пробелы, отступы)
+    "W",   # pycodestyle (предупреждения: лишние пустые строки)
+    "F",   # Pyflakes (критические ошибки: импортирован, но не используется; переменная не задана)
+    "I",   # isort (автоматическая сортировка импортов)
+    "B",   # flake8-bugbear (поиск логических ошибок и "плохих практик")
+    "UP",  # pyupgrade (предлагает заменить старый синтаксис на новый, например Python 3.12+)
 ]
-multi_line_output = 3           # Vertical Hanging Indent (скобки)
-force_grid_wrap = 2             # Оборачивать в скобки, если 2+ импорта
-include_trailing_comma = true   # Запятая в конце — для удобства Git
-lines_after_imports = 2         # Пустая строка после блока импортов
-combine_as_imports = true
-force_sort_within_sections = true
-known_first_party = "src"  # ← замените на имя вашего пакета
+ignore = ["E501"] # Игнорировать длину строки, если вы не хотите, чтобы Ruff её проверял
+
+[tool.ruff.lint.isort]
+# Настройка поведения сортировки импортов
+lines-after-imports = 2
+force-sort-within-sections = true
+known-first-party = ["src"]
+
+[tool.ruff.format]
+# Настройки автоматического форматирования кода
+quote-style = "double" # Использовать двойные кавычки (как в Black)
+indent-style = "space" # Использовать пробелы вместо табов
+# skip-magic-trailing-comma = false
+# Не убирать запятую в конце списка, если она там есть
+
 
 [tool.mypy]
+# Настройки строгой проверки типов
 python_version = "3.12"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-no_implicit_optional = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-warn_unreachable = true
-exclude = [
-    ".venv",
-    ".mypy_cache",
-    ".pytest_cache",
-    "build",
-    "dist"
-]
-
-# Применить настройки ко всем модулям, начинающимся с "test_"
-#[tool.mypy."test_*"]
-#ignore_errors = true
-
-#[[tool.mypy.overrides]]
-#module = ["tests.*", "test_*"]
-#disallow_untyped_defs = false
-#warn_return_any = false
+strict = true  # Включает все проверки (untyped defs, optional, и др.)
+exclude = ["venv", ".venv", "build", "dist"]
 
 [[tool.mypy.overrides]]
+# Послабления для папки с тестами (в тестах типы часто не пишут строго)
 module = "tests.*"
 disallow_untyped_defs = false
-warn_return_any = false
-
-
-[tool.poetry.scripts]
-lint = "scripts.lint:main"
 
 [tool.pytest.ini_options]
+# Настройки фреймворка для тестирования
 testpaths = ["tests"]
+# Добавляем флаги: --cov указывает на папку с кодом, --cov-report=term-missing покажет пропущенные строки в терминале
 python_files = ["test_*.py", "*_test.py"]
 python_functions = ["test*"]
+# addopts — это параметры по умолчанию:
+# --cov=src: считать покрытие в папке src
+# --cov-report=term-missing: выводить в консоль пропущенные строки
+# --cov-report=xml: формировать файл coverage.xml для CI
+addopts = "--cov=src --cov-report=term-missing --cov-report=xml"
+
+#[tool.poetry.scripts]
+## Быстрые команды для запуска через 'poetry run <command>'
+## Проверить код на ошибки:
+#lint = "ruff check src tests && mypy src"
+## Исправить ошибки стиля и отформатировать:
+#format = "ruff check --fix src tests && ruff format src tests"
+#test = "pytest"
+
+[tool.poe.tasks]
+# Задача для проверки кода (Линтинг)
+lint = [
+  { cmd = "ruff check src tests" },
+  { cmd = "mypy src" }
+]
+
+# Задача для исправления и форматирования
+format = [
+  { cmd = "ruff check --fix src tests" },
+  { cmd = "ruff format src tests" }
+]
+
+# Задача для тестов
+test = "pytest"

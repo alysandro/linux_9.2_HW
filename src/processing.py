@@ -10,7 +10,7 @@ from typing import Any
 
 def filter_by_state(
     data: list[dict[str, Any]],
-    state: str = 'EXECUTED',
+    state: str = "EXECUTED",
 ) -> list[dict[str, Any]]:
     """Функция принимает список словарей и опционально
     значение для ключа state (по умолчанию 'EXECUTED').
@@ -19,7 +19,7 @@ def filter_by_state(
     """
     filtered_list = []
     for item in data:
-        if item['state'] == state:
+        if item["state"] == state:
             filtered_list.append(item)
     return filtered_list
 
@@ -41,29 +41,29 @@ def sort_by_date(
     """
     return sorted(
         list_of_dicts,
-        key=lambda x: datetime.fromisoformat(x['date']),
+        key=lambda x: datetime.fromisoformat(x["date"]),
         reverse=reverse,
     )
 
 
 # Пример данных
 list_of_dicts = [
-    {'id': 414288290, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
-    {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},
-    {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
-    {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'},
+    {"id": 414288290, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+    {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+    {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
+    {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
 ]
 
 
 # Примеры использования
-executed_transactions = filter_by_state(list_of_dicts, 'EXECUTED')
-print('Выполненные операции:')
+executed_transactions = filter_by_state(list_of_dicts, "EXECUTED")
+print("Выполненные операции:")
 print(executed_transactions)
 
-canceled_transactions = filter_by_state(list_of_dicts, 'CANCELED')
-print('\nОтменённые операции:')
+canceled_transactions = filter_by_state(list_of_dicts, "CANCELED")
+print("\nОтменённые операции:")
 print(canceled_transactions)
 
 sorted_transactions = sort_by_date(list_of_dicts)
-print('\nОперации по дате (по убыванию):')
+print("\nОперации по дате (по убыванию):")
 print(sorted_transactions)
