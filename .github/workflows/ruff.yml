@@ -13,3 +13,15 @@ jobs:
       uses: astral-sh/ruff-action@v3
       with:
         args: "format --check ."
+    - name: Run Ruff (Fix and Format)
+      run: |
+        pip install ruff
+        # Исправляем ошибки, которые можно исправить автоматически
+        ruff check --fix .
+        # Применяем форматирование
+        ruff format .
+
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "style: fix lint and format with ruff"
