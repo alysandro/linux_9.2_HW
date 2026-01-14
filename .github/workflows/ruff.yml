@@ -1,27 +1,40 @@
 name: Ruff
+
 on: [push, pull_request]
 
 jobs:
   ruff:
     runs-on: ubuntu-latest
-    steps:
-    - name: Run Ruff (Lint)
-      uses: astral-sh/ruff-action@v3
-      with:
-        args: "check ."
-    - name: Run Ruff (Format check)
-      uses: astral-sh/ruff-action@v3
-      with:
-        args: "format --check ."
-    - name: Run Ruff (Fix and Format)
-      run: |
-        pip install ruff
-        # Исправляем ошибки, которые можно исправить автоматически
-        ruff check --fix .
-        # Применяем форматирование
-        ruff format .
 
-    - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: "style: fix lint and format with ruff"
+    steps:
+      # 1. ОБЯЗАТЕЛЬНО: сначала клонируем репозиторий
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Устанавливаем ruff
+      - name: Install ruff
+        run: pip install ruff
+
+      # 3. Проверяем линтинг (без исправлений)
+      - name: Run Ruff (Lint)
+        run: ruff check .
+
+      # 4. Проверяем форматирование (без изменений)
+      - name: Run Ruff (Format check)
+        run: ruff format --check .
+
+      # 5. Исправляем всё автоматически
+      - name: Fix and Format
+        run: |
+          ruff check --fix .
+          ruff format .
+
+      # 6. Коммитим изменения, если есть правки
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: fix lint and format with ruff"
+          # Опционально: укажите конкретные файлы
+          # file_pattern: "*.py"
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
