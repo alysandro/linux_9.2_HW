@@ -40,5 +40,5 @@ def test_invalid_card_number():
     assert str(exc_info.value) == "Номер карты не содержит цифр"
 
 
-def test_get_mask_account():
-    assert get_mask_account("15326548995852688589569") == "** 9569"
+def test_get_mask_account(mask_accountr):
+    assert get_mask_account("15326548995852688589569") == mask_accountr
