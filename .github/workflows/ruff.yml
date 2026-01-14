@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      #      - ЭТО ВАЖНЫЙ ШАГ ДЛЯ ЗАПИСИ
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Позволяет видеть всю историю и коммитить
+          token: ${{ secrets.GITHUB_TOKEN }} # Использует стандартный токен GitHub
+
       # 1. ОБЯЗАТЕЛЬНО: сначала клонируем репозиторий
       - name: Checkout code
         uses: actions/checkout@v4
