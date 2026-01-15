@@ -1,0 +1,49 @@
+name: Ruff
+
+on: [push, pull_request]
+
+# Разрешаем Actions записывать изменения в репозиторий
+permissions:
+  contents: write
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Клонируем репозиторий со всей историей
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. Устанавливаем ruff
+      - name: Install ruff
+        run: pip install ruff
+
+      # 3. Применяем исправления и форматирование сразу
+      # Если правок не будет, следующий шаг просто ничего не сделает
+      - name: Fix and Format
+        run: |
+          ruff check --fix .
+          ruff format .
+        timeout-minutes: 10
+
+      - name: Show changes
+        run: git diff --name-only --cached
+
+      - name: Debug Action Version
+        run: |
+          echo "Action version: $(cat /home/runner/work/_actions/stefanzweifel/git-auto-commit-action/v6/action.yml | grep version)"
+
+      # 4. Коммитим изменения, если Ruff что-то поправил
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: "style: fix lint and format with ruff"
+          file_pattern: .
+          commit_user_name: github-actions[bot]"
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: alysandro <163910150+alysandro@users.noreply.github.com>
+#          skip_if_nothing_to_commit: true
+          branch: Feature/homework 10 2
