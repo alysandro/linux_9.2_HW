@@ -75,3 +75,53 @@ try:
         print(next(usd_descriptions))
 except StopIteration:
     print("Больше нет описаний для USD")
+
+# from collections.abc import Generator
+
+
+def card_number_generator(start: int, end: int) -> Generator[str, None, None]:
+    """
+    Генератор номеров банковских карт в формате XXXX XXXX XXXX XXXX.
+
+    Выдаёт номера карт в заданном диапазоне (включительно),
+    дополняя их ведущими нулями до 16 цифр и разбивая на группы по 4.
+
+    Args:
+        start: Начальное число диапазона (от 1 до 9999999999999999).
+        end: Конечное число диапазона (до 9999999999999999).
+
+    Yields:
+        Строка с номером карты в формате "XXXX XXXX XXXX XXXX".
+
+    Raises:
+        ValueError: Если start < 1, end > 9999999999999999 или start > end.
+
+    Example:
+        >>> for num in card_number_generator(1, 5):
+        ...     print(num)
+        0000 0000 0000 0001
+        0000 0000 0000 0002
+        0000 0000 0000 0003
+        0000 0000 0000 0004
+        0000 0000 0000 0005
+    """
+    # Проверка границ
+    if start < 1:
+        raise ValueError("start должно быть ≥ 1")
+    if end > 9999_9999_9999_9999:
+        raise ValueError("end не может превышать 9999999999999999")
+    if start > end:
+        raise ValueError("start не может быть больше end")
+
+    for number in range(start, end + 1):
+        # Форматируем число как 16‑значную строку с ведущими нулями
+        card_str = f"{number:016d}"
+        # Разбиваем на группы по 4 цифры
+        formatted = f"{card_str[:4]} {card_str[4:8]} {card_str[8:12]} {card_str[12:16]}"
+        yield formatted
+
+
+# Пример использования
+if __name__ == "__main__":
+    for card_number in card_number_generator(999950, 999999):
+        print(card_number)
