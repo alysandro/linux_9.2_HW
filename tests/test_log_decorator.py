@@ -14,27 +14,6 @@ EXPECTED_RESULT = 5
 TIMESTAMP_PATTERN = r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]'
 LOGS_DIR = Path('logs')
 
-# --- Фикстуры ---
-
-
-@pytest.fixture
-def log_file():
-    """
-    Фикстура для лог-файла в директории logs/.
-    Перед тестом и после теста файл очищается.
-    """
-    LOGS_DIR.mkdir(exist_ok=True)
-    path = LOGS_DIR / 'test_log.txt'
-
-    if path.exists():
-        path.unlink()
-
-    yield path
-
-    if path.exists():
-        path.unlink()
-
-
 # --- Тестируемые функции ---
 
 
@@ -108,8 +87,6 @@ def test_log_file_error(log_file: Path):
 
 
 # --- Проверка формата логов ---
-
-
 def test_log_format_precision(capsys: CaptureFixture[str]):
     """Строгая проверка формата строк лога."""
     success_func(1, 1)

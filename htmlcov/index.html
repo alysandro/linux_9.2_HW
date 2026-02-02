@@ -11,7 +11,7 @@
 <header>
     <div class="content">
         <h1>Coverage report:
-            <span class="pc_cov">22%</span>
+            <span class="pc_cov">26%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -26,8 +26,6 @@
                         <kbd>s</kbd>
                         <kbd>m</kbd>
                         <kbd>x</kbd>
-                        <kbd>b</kbd>
-                        <kbd>p</kbd>
                         <kbd>c</kbd>
                         &nbsp; change column sorting
                     </p>
@@ -45,7 +43,7 @@
         <form id="filter_container">
             <input id="filter" type="text" value="" placeholder="filter...">
             <div>
-                <input id="hide100" type="checkbox" checked disabled >
+                <input id="hide100" type="checkbox" >
                 <label for="hide100">hide covered</label>
             </div>
         </form>
@@ -56,90 +54,65 @@
         </h2>
         <p class="text">
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.2">coverage.py v7.13.2</a>,
-            created at 2026-02-02 23:55 +0300
+            created at 2026-02-03 01:55 +0300
         </p>
     </div>
 </header>
 <main id="index">
     <table class="index" data-sortable>
         <thead>
-            <tr class="tablehead grouphead">
-                <th class="spacer">&nbsp;</th>
-                <th class="spacer">&nbsp;</th>
-                <th class="left" colspan="4">Statements</th>
-                <th class="spacer">&nbsp;</th>
-                <th class="left" colspan="3">Branches</th>
-                <th class="spacer">&nbsp;</th>
-                <th>Total</th>
-            </tr>
             <tr class="tablehead" title="Click to sort">
                 <th id="file" class="name" aria-sort="none" data-shortcut="f">File<span class="arrows"></span></th>
                 <th class="spacer">&nbsp;</th>
-                <th id="statements_coverage" aria-sort="none" data-default-sort-order="descending">coverage<span class="arrows"></span></th>
                 <th id="statements" aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements<span class="arrows"></span></th>
                 <th id="missing" aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing<span class="arrows"></span></th>
                 <th id="excluded" aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded<span class="arrows"></span></th>
-                <th class="spacer">&nbsp;</th>
-                <th id="branches_coverage" aria-sort="none" data-default-sort-order="descending">coverage<span class="arrows"></span></th>
-                <th id="branches" aria-sort="none" data-default-sort-order="descending" data-shortcut="b">branches<span class="arrows"></span></th>
-                <th id="partial" aria-sort="none" data-default-sort-order="descending" data-shortcut="p">partial<span class="arrows"></span></th>
                 <th class="spacer">&nbsp;</th>
                 <th id="coverage" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
             </tr>
         </thead>
         <tbody>
             <tr class="region">
-                <td class="name"><a href="z_540a772173cf5c02_log_decorator_py.html">decorators&#8201;/&#8201;log_decorator.py</a></td>
+                <td class="name"><a href="z_9dd04a51d9f14ac8___init___py.html">src&#8201;/&#8201;decorators&#8201;/&#8201;__init__.py</a></td>
                 <td class="spacer">&nbsp;</td>
-                <td data-ratio="35 36">97%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="region">
+                <td class="name"><a href="z_9dd04a51d9f14ac8_log_decorator_py.html">src&#8201;/&#8201;decorators&#8201;/&#8201;log_decorator.py</a></td>
+                <td class="spacer">&nbsp;</td>
                 <td>36</td>
-                <td>1</td>
-                <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="spacer">&nbsp;</td>
-                <td data-ratio="5 6">83%</td>
-                <td>6</td>
-                <td>1</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="40 42">95%</td>
+                <td data-ratio="36 36">100%</td>
             </tr>
             <tr class="region">
                 <td class="name"><a href="z_145eef247bfb46b6_generators_py.html">src&#8201;/&#8201;generators.py</a></td>
                 <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 49">0%</td>
-                <td>49</td>
-                <td>49</td>
-                <td>3</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 28">0%</td>
-                <td>28</td>
+                <td>52</td>
+                <td>52</td>
                 <td>0</td>
                 <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 77">0%</td>
+                <td data-ratio="0 52">0%</td>
             </tr>
             <tr class="region">
                 <td class="name"><a href="z_145eef247bfb46b6_masks_py.html">src&#8201;/&#8201;masks.py</a></td>
                 <td class="spacer">&nbsp;</td>
+                <td>14</td>
+                <td>14</td>
+                <td>0</td>
+                <td class="spacer">&nbsp;</td>
                 <td data-ratio="0 14">0%</td>
-                <td>14</td>
-                <td>14</td>
-                <td>0</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 4">0%</td>
-                <td>4</td>
-                <td>0</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 18">0%</td>
             </tr>
             <tr class="region">
                 <td class="name"><a href="z_145eef247bfb46b6_processing_py.html">src&#8201;/&#8201;processing.py</a></td>
                 <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 17">0%</td>
                 <td>17</td>
                 <td>17</td>
-                <td>0</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 0">100%</td>
-                <td>0</td>
                 <td>0</td>
                 <td class="spacer">&nbsp;</td>
                 <td data-ratio="0 17">0%</td>
@@ -147,50 +120,39 @@
             <tr class="region">
                 <td class="name"><a href="z_145eef247bfb46b6_widget_py.html">src&#8201;/&#8201;widget.py</a></td>
                 <td class="spacer">&nbsp;</td>
+                <td>20</td>
+                <td>20</td>
+                <td>0</td>
+                <td class="spacer">&nbsp;</td>
                 <td data-ratio="0 20">0%</td>
-                <td>20</td>
-                <td>20</td>
-                <td>0</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 4">0%</td>
-                <td>4</td>
-                <td>0</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="0 24">0%</td>
             </tr>
         </tbody>
         <tfoot>
             <tr class="total">
                 <td class="name">Total</td>
                 <td class="spacer">&nbsp;</td>
-                <td data-ratio="35 136">26%</td>
-                <td>136</td>
-                <td>101</td>
-                <td>4</td>
+                <td>139</td>
+                <td>103</td>
+                <td>0</td>
                 <td class="spacer">&nbsp;</td>
-                <td data-ratio="5 42">12%</td>
-                <td>42</td>
-                <td>1</td>
-                <td class="spacer">&nbsp;</td>
-                <td data-ratio="40 178">22%</td>
+                <td data-ratio="36 139">26%</td>
             </tr>
         </tfoot>
     </table>
     <p id="no_rows">
         No items found using the specified filter.
     </p>
-        <p>2 files skipped due to complete coverage.</p>
 </main>
 <footer>
     <div class="content">
         <p>
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.2">coverage.py v7.13.2</a>,
-            created at 2026-02-02 23:55 +0300
+            created at 2026-02-03 01:55 +0300
         </p>
     </div>
     <aside class="hidden">
         <a id="prevFileLink" class="nav" href="z_145eef247bfb46b6_widget_py.html"></a>
-        <a id="nextFileLink" class="nav" href="z_540a772173cf5c02_log_decorator_py.html"></a>
+        <a id="nextFileLink" class="nav" href="z_9dd04a51d9f14ac8___init___py.html"></a>
         <button type="button" class="button_prev_file" data-shortcut="["></button>
         <button type="button" class="button_next_file" data-shortcut="]"></button>
         <button type="button" class="button_show_hide_help" data-shortcut="?"></button>

@@ -7,8 +7,9 @@ from typing import Any, TypeVar, cast
 
 F = TypeVar('F', bound=Callable[..., Any])
 
-LOGS_DIR = Path('logs')
-LOGS_DIR.mkdir(exist_ok=True)
+LOGS_DIR = Path('./logs')
+LOGS_DIR.mkdir(exist_ok=True)  # создаёт папку logs, если её нет
+path = LOGS_DIR / 'test_log.txt'  # формирует путь к файлу
 
 
 def log(filename: str | None = None) -> Callable[[F], F]:
