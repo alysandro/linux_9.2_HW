@@ -1,0 +1,9 @@
+[run]
+source = .
+include =
+    */decorators/*
+    */tests/*
+omit =
+    */tests/__init__.py
+    */venv/*
+    */.venv/*

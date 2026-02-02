@@ -1,6 +1,7 @@
-
+[![Ruff](https://github.com/alysandro/linux_9.2_HW/actions/workflows/ruff.yml/badge.svg)](https://github.com/alysandro/linux_9.2_HW/actions/workflows/ruff.yml)
 ## Функция "get_mask_card_number(card: str) -> str:
-    '''Функцию маскировки номера банковской карты. Выводит в формате: XXXX XX** **** XXXX'''".
+` Функцию маскировки номера банковской карты.  Выводит в формате:  XXXX XX** **** XXXX`
+
 Принимает список словарей и опционально значение для ключа state
 (по умолчанию'EXECUTED'). Функция возвращает новый список словарей, содержащий только те словари,
 у которых ключ state соответствует указанному значению.
