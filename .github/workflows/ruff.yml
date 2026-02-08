@@ -46,4 +46,4 @@ jobs:
           commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
           commit_author: alysandro <163910150+alysandro@users.noreply.github.com>
 #          skip_if_nothing_to_commit: true
-          branch: Feature/homework 10 2
+          branch: ${{ github.ref }}

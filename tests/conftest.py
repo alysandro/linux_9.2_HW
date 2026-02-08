@@ -2,6 +2,8 @@ import copy
 
 import pytest
 
+from src.decorators.log_decorator import LOGS_DIR
+
 
 @pytest.fixture
 def mask_account():
@@ -107,3 +109,16 @@ def transaction_without_currency_code(transaction_to_list):
 @pytest.fixture
 def eur_transaction():
     return {'id': 1239719570, 'operationAmount': {'currency': {'code': 'EUR'}}}
+
+
+@pytest.fixture
+def log_file():
+    LOGS_DIR.mkdir(exist_ok=True)
+    print(f'Создана папка: {LOGS_DIR}')  # отладочный вывод
+    path = LOGS_DIR / 'test_log.txt'
+    if path.exists():
+        path.unlink()
+    print(f'Путь к файлу: {path}')  # отладочный вывод
+    yield path
+    if path.exists():
+        path.unlink()
