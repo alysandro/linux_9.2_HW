@@ -15,12 +15,30 @@ def test_log_message():
 
 
 def test_console_handler_level():
-    """Проверяет, что консольный обработчик настроен на уровень INFO."""
+    """Тест: консольный обработчик имеет уровень INFO."""
+    print('\n=== ТЕСТ: проверка уровня консольного обработчика ===')
+    print(f'Все обработчики: {logger.handlers}')
+
+    console_handler = None
+
+    # Ищем консольный обработчик
     for handler in logger.handlers:
-        if isinstance(handler, logging.StreamHandler):  # Ищем консольный обработчик
-            assert handler.level == logging.INFO
-            return
-    pytest.fail('Консольный обработчик не найден')
+        print(
+            f'  Обработчик: {type(handler).__name__}, уровень: {handler.level} ({logging.getLevelName(handler.level)})'
+        )
+        if isinstance(handler, logging.StreamHandler):
+            console_handler = handler
+
+    # Проверяем, что нашли консольный обработчик
+    assert console_handler is not None, 'Консольный обработчик (StreamHandler) не найден'
+
+    # Проверяем его уровень
+    assert console_handler.level == logging.INFO, (
+        f'Уровень консольного обработчика: {console_handler.level} '
+        f'({logging.getLevelName(console_handler.level)}), ожидается INFO (20)'
+    )
+
+    print('✅ Тест пройден: консольный обработчик имеет уровень INFO')
 
 
 def test_file_handler_level():
