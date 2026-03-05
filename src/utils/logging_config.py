@@ -88,7 +88,7 @@ def setup_logger(
     log_format = format_type or LOG_FORMAT
     log_file = log_file or LOG_FILE
 
-    logger.setLevel(logging.NOTSET)
+    logger.setLevel(logging.DEBUG)
 
     # Форматировщики
     if log_format == 'json':
