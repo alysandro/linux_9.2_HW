@@ -1,4 +1,5 @@
 from functools import lru_cache
+import math
 import time
 from typing import TypedDict
 
@@ -89,7 +90,7 @@ def convert_to_rub(
             logger.warning('Некорректное amount для RUB: %s. ID: %s', amount, transaction_id or 'N/A')
     else:
         rate = get_exchange_rate(currency)
-        if rate == 0.0:
+        if math.isclose(rate, 0.0, abs_tol=1e-9):
             logger.error('Не удалось получить курс для %s. ID: %s', currency, transaction_id or 'N/A')
         else:
             try:
