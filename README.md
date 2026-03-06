@@ -1,4 +1,7 @@
 [![Ruff](https://github.com/alysandro/linux_9.2_HW/actions/workflows/ruff.yml/badge.svg)](https://github.com/alysandro/linux_9.2_HW/actions/workflows/ruff.yml)
+[![Python Poetry CI](https://github.com/alysandro/linux_9.2_HW/actions/workflows/python-ci.yml/badge.svg)](https://github.com/alysandro/linux_9.2_HW/actions/workflows/python-ci.yml)
+[![CodeQL](https://github.com/alysandro/linux_9.2_HW/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/alysandro/linux_9.2_HW/actions/workflows/github-code-scanning/codeql)
+
 ## Функция "get_mask_card_number(card: str) -> str:
 ` Функцию маскировки номера банковской карты.  Выводит в формате:  XXXX XX** **** XXXX`
 

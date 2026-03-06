@@ -6,7 +6,7 @@ description = "Домашнее задание по курсу Linux"
 authors = [{ name = "ALEXANDR_SH", email = "sandro.86@bk.ru" }]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [] # Основные зависимости приложения (библиотеки)
+dependencies = ["requests (>=2.32.5,<3.0.0)"] # Основные зависимости приложения (библиотеки)
 
 [tool.poetry]
 # Настройки специфичные для пакетного менеджера Poetry
@@ -74,7 +74,7 @@ ignore = [
     "T201",
 ]
 
-preview = true
+preview = false
 
 [tool.ruff.lint.isort]
 # Настройка поведения сортировки импортов
