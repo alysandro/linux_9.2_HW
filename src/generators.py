@@ -136,8 +136,7 @@ def card_number_generator(start: int, end: int) -> Generator[str, None, None]:
         # Форматируем число как 16‑значную строку с ведущими нулями
         card_str = f'{number:016d}'
         # Разбиваем на группы по 4 цифры
-        formatted = f'{card_str[:4]} {card_str[4:8]} {card_str[8:12]} {card_str[12:16]}'
-        yield formatted
+        yield f'{card_str[:4]} {card_str[4:8]} {card_str[8:12]} {card_str[12:16]}'
 
 
 # Пример использования

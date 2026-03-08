@@ -74,7 +74,7 @@ ignore = [
     "T201",
 ]
 
-preview = true
+preview = false
 
 [tool.ruff.lint.isort]
 # Настройка поведения сортировки импортов
