@@ -5,7 +5,8 @@ import sys
 from typing import Literal
 
 import colorlog
-from decouple import config  # comment for test ok - import json_log_formatter
+from decouple import config
+import json_log_formatter
 
 from src.utils.constants import (
     DEFAULT_BACKUP_COUNT,
