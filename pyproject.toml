@@ -24,6 +24,8 @@ covdefaults = "^2.3.0"
 pytest-cov = "^7.0.0" # Добавьте это (актуальная версия на 2026)
 poethepoet = "^0.40.0"
 types-requests = "2.32.4.20260107"#заглушка для тестов муру
+python-decouple = "^3.8"
+colorlog = "6.10.1"
 
 [build-system]
 # Настройки сборки пакета
