@@ -7,10 +7,12 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "requests>=2.32.5",
-    "json-log-formatter>=1.1.1"
-]
+
+[tool.poetry.dependencies]
+requests = ">=2.32.5"
+json-log-formatter = ">=1.1.1"
+python-decouple = "^3.8"  # Добавьте этот модуль
+colorlog = "^6.10.1"      # И этот модуль
 
 [build-system]
 requires = ["poetry-core>=2.0.0"]
