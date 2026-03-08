@@ -1,119 +1,70 @@
 [project]
-# Основные метаданные проекта (стандарт PEP 621)
 name = "linux-9-2-hw"
 version = "0.1.0"
 description = "Домашнее задание по курсу Linux"
-authors = [{ name = "ALEXANDR_SH", email = "sandro.86@bk.ru" }]
+authors = [
+    { name = "ALEXANDR_SH", email = "sandro.86@bk.ru" }
+]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["requests (>=2.32.5,<3.0.0)"] # Основные зависимости приложения (библиотеки)
-
-[tool.poetry]
-# Настройки специфичные для пакетного менеджера Poetry
-packages = [{ include = "src" }]
-
-[tool.poetry.group.lint.dependencies]
-# Инструменты для проверки качества кода и типов
-ruff = "^0.9.2"    # Заменяет Black, isort и Flake8 (быстрый линтер на Rust)
-mypy = "^1.14.0"   # Статический анализатор типов
-
-[tool.poetry.group.dev.dependencies]
-# Зависимости для разработки и тестирования
-pytest = "^9.0.2"
-covdefaults = "^2.3.0"
-pytest-cov = "^7.0.0" # Добавьте это (актуальная версия на 2026)
-poethepoet = "^0.40.0"
-types-requests = "2.32.4.20260107"#заглушка для тестов муру
-python-decouple = "^3.8"
-colorlog = "6.10.1"
+dependencies = [
+    "requests>=2.32.5",
+    "json-log-formatter>=1.1.1"
+]
 
 [build-system]
-# Настройки сборки пакета
 requires = ["poetry-core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+packages = [{ include = "src" }]
+
 [tool.ruff]
-# Глобальные настройки Ruff (аналог настроек Black и Flake8)
 line-length = 119
 target-version = "py312"
 respect-gitignore = true
 exclude = [".git", ".ruff_cache", ".venv", "venv"]
 
 [tool.ruff.lint]
-
-select  = [
-    # Настройки правил линтера
-#    "E",   # pycodestyle (ошибки стиля: пробелы, отступы)
-#    "W",   # pycodestyle (предупреждения: лишние пустые строки)
-#    "F",   # Pyflakes (критические ошибки: импортирован, но не используется; переменная не задана)
-#    "I",   # isort (автоматическая сортировка импортов)
-#    "B",   # flake8-bugbear (поиск логических ошибок и "плохих практик")
-#    "UP",  # pyupgrade (предлагает заменить старый синтаксис на новый, например Python 3.12+)
-#
-#    "C",   # Pyflakes (ошибки, связанные с циклическими импортами)
-#    "M",   # Общие ошибки (например, нет нужного пакета)
-#    "R",   # Предупреждения об ошибках в переменных
-#    "D",   # Ошибки в докстрингах (нежелательно, но возможно, если хотите)
-#    "T"    # Типы данных и аннотации
-    "ALL",  #  Все
-]
-
+select = ["E", "W", "F", "I", "B", "UP"]  # Базовые правила
 ignore = [
-    "E501", # Игнорировать длину строки, если вы не хотите, чтобы Ruff её проверял
-    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in `**kwargs"
-    "CPY001", # Missing copyright notice at top of file
-    "D", # Rules about docstrings
-    "DOC", # Rules about docstrings
-    "EM101", # Exception must not use a string literal, assign to variable first
-    "TRY003", # Avoid specifying long messages outside the exception class
+    "E501",  # Игнорировать длину строки
+    "ANN401", # Dynamically typed expressions (typing.Any)
+    "CPY001", # Missing copyright notice
     "COM812", # Trailing comma missing
     "PLC0414", # Import alias does not rename original package
-    "PLR6301", # Method could be a function, class method, or static method
-    "RUF001", # String contains ambiguous
-    "EM102", # Exception must not use an f-string literal, assign to variable first
-    "TRY300", # Consider moving this statement to an `else` block
-    "RUF002",
-    "RUF003",
-    "T201",
+    "PLR6301"  # Method could be a function
 ]
-
 preview = false
 
 [tool.ruff.lint.isort]
-# Настройка поведения сортировки импортов
 lines-after-imports = 2
 force-sort-within-sections = true
 known-first-party = ["src"]
 combine-as-imports = true
 
 [tool.ruff.format]
-# Настройки автоматического форматирования кода
-quote-style = "single" # Использовать двойные кавычки (как в Black)
-indent-style = "space" # Использовать пробелы вместо табов
+quote-style = "single"
+indent-style = "space"
 skip-magic-trailing-comma = false
-# Не убирать запятую в конце списка, если она там есть
 line-ending = "lf"
-
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = [
     "S101", # Use of `assert` detected
-    "ANN201", # Missing return type annotation for public function
-    "ANN001", # Missing type annotation for function argument
+    "ANN201", # Missing return type annotation
+    "ANN001", # Missing type annotation for argument
     "SLF001", # Private member accessed
     "S105", # Possible hardcoded password
-    "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
-    "ARG", # Unused method argument
+    "S311"  # Standard pseudo-random generators
 ]
 
 [tool.ruff.lint.flake8-quotes]
 inline-quotes = "single"
 
-
 [tool.mypy]
-# Настройки строгой проверки типов
 python_version = "3.12"
-strict = true  # Включает все проверки (untyped defs, optional, и др.)
+strict = true
 exclude = ["venv", ".venv", "build", "dist"]
 show_error_codes = true
 ignore_missing_imports = true
@@ -127,51 +78,28 @@ allow_redefinition = true
 exclude_gitignore = true
 
 [[tool.mypy.overrides]]
-# Послабления для папки с тестами (в тестах типы часто не пишут строго)
 module = "tests.*"
 disallow_untyped_defs = false
-disable_error_code = [
-    "no-untyped-def", #  Function is missing a type annotation
-]
+disable_error_code = ["no-untyped-def"]
 
 [tool.pytest.ini_options]
-# Настройки фреймворка для тестирования
 testpaths = ["tests"]
-# Добавляем флаги: --cov указывает на папку с кодом, --cov-report=term-missing покажет пропущенные строки в терминале
 python_files = ["test_*.py", "*_test.py"]
 python_functions = ["test*"]
-# addopts — это параметры по умолчанию:
-# --cov=src: считать покрытие в папке src
-# --cov-report=term-missing: выводить в консоль пропущенные строки
-# --cov-report=xml: формировать файл coverage.xml для CI
-#addopts = "--cov=src --cov-report=term-missing --cov-report=xml"
-addopts = "--cov=src --cov-report term-missing"
-
-#[tool.poetry.scripts]
-## Быстрые команды для запуска через 'poetry run <command>'
-## Проверить код на ошибки:
-#lint = "ruff check src tests && mypy src"
-## Исправить ошибки стиля и отформатировать:
-#format = "ruff check --fix src tests && ruff format src tests"
-#test = "pytest"
-
-[tool.poe.tasks]
-# Задача для проверки кода (Линтинг)
-lint = [
-  { cmd = "ruff check src tests" },
-  { cmd = "mypy src" }
-]
-
-# Задача для исправления и форматирования
-format = [
-  { cmd = "ruff check --fix src tests" },
-  { cmd = "ruff format src tests" }
-]
-
-# Задача для тестов
-test = "pytest"
+addopts = "--cov=src --cov-report term-missing --cov-report xml"
 
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
 fail_under = 80
+
+[tool.poe.tasks]
+lint = [
+  { cmd = "ruff check src tests" },
+  { cmd = "mypy src" }
+]
+format = [
+  { cmd = "ruff check --fix src tests" },
+  { cmd = "ruff format src tests" }
+]
+test = "pytest"

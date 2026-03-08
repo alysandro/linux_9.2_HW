@@ -216,3 +216,5 @@ __marimo__/
 .streamlit/secrets.toml
 /src/decorators/logs/бэкап/
 /src/utils/uninstal/
+tests/.coverage
+/git_log.txt
