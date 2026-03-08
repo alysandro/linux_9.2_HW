@@ -16,6 +16,7 @@ packages = [{ include = "src" }]
 # Инструменты для проверки качества кода и типов
 ruff = "^0.9.2"    # Заменяет Black, isort и Flake8 (быстрый линтер на Rust)
 mypy = "^1.14.0"   # Статический анализатор типов
+types-requests = "^2.32.0"  # Добавляем stub‑файлы для requests
 
 [tool.poetry.group.dev.dependencies]
 # Зависимости для разработки и тестирования
