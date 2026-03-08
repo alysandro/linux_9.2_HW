@@ -12,26 +12,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache Poetry
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/share/pypoetry
-            ~/.cache/pip
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install Poetry
-        run: pip install poetry
-
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'poetry'
 
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.local/share/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
       - name: Install dependencies
-        run: poetry install --no-interaction --no-root
+        run: poetry install --no-interaction
+
+      - name: Verify dependencies
+        run: |
+          poetry show decouple
+          poetry show colorlog
 
       - name: Run Type Check (Mypy)
         run: poetry run mypy src
