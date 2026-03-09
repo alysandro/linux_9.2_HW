@@ -4,10 +4,17 @@ from pathlib import Path
 from src.utils.json_reader import read_transactions_from_json
 
 
+# 1. Определяем корень относительно файла теста
+# tests/test_json_reader.py -> .parent (tests/) -> .parent (корень/)
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 # Вспомогательные функции для создания тестовых файлов
 def create_test_json_file(file_path: str, data) -> None:
     """Создаёт JSON‑файл с тестовыми данными."""
-    with Path(file_path).open('w', encoding='utf-8') as f:
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)  # Добавьте эту строку
+    with path.open('w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
@@ -22,7 +29,8 @@ class TestReadTransactionsFromJson:
 
     def test_read_valid_json_file(self):
         """Тест: чтение корректного JSON‑файла с данными."""
-        test_file = 'data/test_operations.json'
+        # Используем абсолютный путь от корня проекта
+        test_file = BASE_DIR / 'data' / 'test_operations.json'
         test_data = [{'id': 1, 'amount': 1000, 'currency': 'RUB'}, {'id': 2, 'amount': 50, 'currency': 'USD'}]
 
         create_test_json_file(test_file, test_data)
@@ -32,7 +40,7 @@ class TestReadTransactionsFromJson:
 
     def test_read_empty_json_file(self):
         """Тест: файл существует, но пустой."""
-        test_file = 'data/empty.json'
+        test_file = str(BASE_DIR / 'data') + '/empty.json'
         Path(test_file).write_text('', encoding='utf-8')  # пустой файл
 
         result = read_transactions_from_json(test_file)
@@ -41,7 +49,7 @@ class TestReadTransactionsFromJson:
 
     def test_read_non_list_json(self):
         """Тест: JSON содержит не список (например, словарь)."""
-        test_file = 'data/invalid_structure.json'
+        test_file = str(BASE_DIR / 'data') + '/invalid_structure.json'
         invalid_data = {'operations': [1, 2, 3]}
 
         create_test_json_file(test_file, invalid_data)
@@ -51,12 +59,12 @@ class TestReadTransactionsFromJson:
 
     def test_file_not_found(self):
         """Тест: файл не найден."""
-        result = read_transactions_from_json('data/nonexistent.json')
+        result = read_transactions_from_json(str(BASE_DIR / 'data') + '/nonexistent.json')
         assert result == []
 
     def test_invalid_json_content(self):
         """Тест: содержимое файла — невалидный JSON."""
-        test_file = 'data/broken.json'
+        test_file = str(BASE_DIR / 'data') + '/broken.json'
         Path(test_file).write_text('{invalid json content}', encoding='utf-8')
 
         result = read_transactions_from_json(test_file)
@@ -65,7 +73,7 @@ class TestReadTransactionsFromJson:
 
     def test_read_json_with_nested_data(self):
         """Тест: сложный JSON с вложенными структурами."""
-        test_file = 'data/nested.json'
+        test_file = str(BASE_DIR / 'data') + '/nested.json'
         nested_data = [
             {'id': 1, 'amount': 1500, 'currency': 'EUR', 'details': {'date': '2024-01-01', 'category': 'shopping'}}
         ]
