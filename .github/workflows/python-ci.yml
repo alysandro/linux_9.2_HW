@@ -16,26 +16,18 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'poetry'
+          cache: 'pip'  # Кэшируем pip, а не poetry — так надёжнее при использовании snok/install-poetry
 
       - name: Install Poetry
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-          poetry --version  # Эта команда проверяет, что Poetry установлен (выведет версию в лог)
-
-      - name: Cache Poetry dependencies
-        uses: actions/cache@v3
+        uses: snok/install-poetry@v1
         with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/share/pypoetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-poetry-
+          version: latest
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          cache-poetry-dependencies: true  # Встроенное кэширование зависимостей Poetry
 
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction --no-ansi
 
       - name: Verify dependencies
         run: |
