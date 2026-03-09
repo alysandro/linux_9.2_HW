@@ -283,6 +283,17 @@ files = [
 toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
 
 [[package]]
+name = "decouple"
+version = "0.0.6"
+description = "Decoupling logic"
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "decouple-0.0.6.tar.gz", hash = "sha256:4d5246f34cfc2510868d3d4aa2a763a1cd20ece99c96c0ac191d2db2e7d795a3"},
+]
+
+[[package]]
 name = "idna"
 version = "3.11"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -618,6 +629,18 @@ pytest = ">=7"
 testing = ["process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
+name = "python-decouple"
+version = "3.8"
+description = "Strict separation of settings from code."
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f"},
+    {file = "python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"},
+]
+
+[[package]]
 name = "pyyaml"
 version = "6.0.3"
 description = "YAML parser and emitter for Python"
@@ -798,4 +821,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "a8d26dfa7bff0418c5b6b13c7a72ff1dc3ca557fb4e4ff5457b87e0364dbf056"
+content-hash = "ca7752172d4fa5ac21d402b2b67204ba0852b62e5305ea85536bd1065ec333f1"
