@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'  # Кэшируем pip, а не poetry
+          cache: 'pip'
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -26,14 +26,16 @@ jobs:
           version: latest
           virtualenvs-create: true
           virtualenvs-in-project: true
-          cache-poetry-dependencies: true  # Встроенное кэширование зависимостей Poetry
+
+      - name: Activate virtual environment
+        run: source .venv/bin/activate
 
       - name: Install dependencies
         run: poetry install --no-interaction --no-ansi
 
       - name: Verify dependencies
         run: |
-          poetry show decouple
+          poetry show python-decouple
           poetry show colorlog
 
       - name: List all installed dependencies (for debugging)
