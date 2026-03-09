@@ -50,7 +50,18 @@ jobs:
         # Добавляем фиктивные переменные, если ваш код их требует через decouple
         env:
           API_KEY: "test_key"
-          DEBUG: "True"
+          # Пути
+          LOG_FILE: app.log
+          DATA_DIR: data
+          # Уровни логирования
+          LOG_LEVEL_FILE: DEBUG
+          LOG_LEVEL_CONSOLE: INFO
+          # Ротация логов
+          LOG_MAX_SIZE: 10485760
+          LOG_BACKUP_COUNT: 5
+          # Формат логов: color / json / plain
+          LOG_FORMAT: color
+
         run: poetry run pytest --cov=src --cov-fail-under=80 --cov-report=xml
 
       - name: Upload coverage reports to Codecov
