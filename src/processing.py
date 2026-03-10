@@ -3,6 +3,11 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
+from src.utils.logging_config import setup_logger
+
+
+logger = setup_logger('processing')
+
 
 def filter_by_state(
     data: list[dict[str, Any]],
@@ -13,7 +18,14 @@ def filter_by_state(
 
     Возвращает новый список словарей, у которых 'state' совпадает с указанным.
     """
-    return [item for item in data if item['state'] == state]
+    # Логируем входные параметры
+    logger.info('Фильтрация по статусу: %s. Получено записей: %s', state, len(data))
+
+    result = [item for item in data if item['state'] == state]
+
+    # Логируем результат
+    logger.info('Найдено записей после фильтрации: %s', len(result))
+    return result
 
 
 def sort_by_date(
@@ -32,6 +44,11 @@ def sort_by_date(
     Returns:
         Новый отсортированный список словарей.
     """
+    # Логируем начало сортировки
+    logger.info(
+        'Сортировка списка из %s записей. Порядок: %s', len(list_of_dicts), 'убывание' if reverse else 'возрастание'
+    )
+
     return sorted(
         list_of_dicts,
         key=lambda x: datetime.fromisoformat(x['date']),
