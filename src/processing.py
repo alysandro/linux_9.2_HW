@@ -21,7 +21,7 @@ def filter_by_state(
     # Логируем входные параметры
     logger.info('Фильтрация по статусу: %s. Получено записей: %s', state, len(data))
 
-    result = [item for item in data if item['state'] == state]
+    result = [item for item in data if item.get('state') == state]
 
     # Логируем результат
     logger.info('Найдено записей после фильтрации: %s', len(result))
