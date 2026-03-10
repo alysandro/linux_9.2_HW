@@ -2,6 +2,10 @@ import math
 from unittest.mock import patch
 
 from src.external_api.currency_converter import convert_to_rub
+from src.utils.logging_config import setup_logger
+
+
+setup_logger('old_mod', mode='a')
 
 
 EXPECTED_USD_RATE = 90.0

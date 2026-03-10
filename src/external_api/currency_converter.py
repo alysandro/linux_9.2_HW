@@ -7,7 +7,10 @@ from decouple import config
 import requests
 
 from src.decorators.log_decorator import log
-from src.utils.logging_config import logger
+from src.utils.logging_config import setup_logger
+
+
+logger = setup_logger('currency_converter')
 
 
 class RequestParams(TypedDict, total=False):
@@ -43,7 +46,7 @@ def get_exchange_rate(currency: str) -> float:
         try:
             rate = float(result)
         except (TypeError, ValueError):
-            logger.error('Некорректный тип поля "result" в ответе API для валюты %s: %r', currency, result)
+            logger.exception('Некорректный тип поля "result" в ответе API для валюты %s: %r', currency, result)
             return 0.0
 
         if rate > 0:
@@ -54,14 +57,16 @@ def get_exchange_rate(currency: str) -> float:
         return 0.0
 
     except requests.Timeout:
-        logger.error('Таймаут запроса для валюты %s', currency)
+        logger.exception('Таймаут запроса для валюты %s', currency)
     except requests.HTTPError as e:
         status_code = e.response.status_code if e.response else 'N/A'
-        logger.error('HTTP-ошибка %s для валюты %s: %s', status_code, currency, e)
-    except requests.RequestException as e:
-        logger.error('Сетевая ошибка для валюты %s: %s', currency, e)
-    except (ValueError, KeyError, TypeError) as e:
-        logger.error('Ошибка парсинга ответа для валюты %s: %s', currency, e)
+        logger.exception('HTTP-ошибка %s для валюты %s', status_code, currency)
+
+    except requests.RequestException:
+        logger.exception('Сетевая ошибка для валюты %s', currency)
+
+    except (ValueError, KeyError, TypeError):
+        logger.exception('Ошибка парсинга ответа для валюты %s', currency)
 
     return 0.0
 
