@@ -137,9 +137,3 @@ def card_number_generator(start: int, end: int) -> Generator[str, None, None]:
         card_str = f'{number:016d}'
         # Разбиваем на группы по 4 цифры
         yield f'{card_str[:4]} {card_str[4:8]} {card_str[8:12]} {card_str[12:16]}'
-
-
-# Пример использования
-if __name__ == '__main__':
-    for card_number in card_number_generator(999950, 999999):
-        print(card_number)

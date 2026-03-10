@@ -3,10 +3,10 @@ import functools
 from pathlib import Path
 from typing import Any, TypeVar, cast
 
+from src.utils.constants import LOGS_DIR
+
 
 F = TypeVar('F', bound=Callable[..., Any])
-
-LOGS_DIR = Path('logs')
 
 
 def log(filename: str | None = None) -> Callable[[F], F]:
@@ -32,14 +32,11 @@ def log(filename: str | None = None) -> Callable[[F], F]:
             if filename:
                 path_obj = Path(filename)
 
-                # ИСПРАВЛЕННОЕ УСЛОВИЕ:
-                # Если путь абсолютный ИЛИ уже начинается с папки 'logs'
-                if path_obj.is_absolute() or (path_obj.parts and path_obj.parts[0] == 'logs'):
-                    log_file_path = path_obj
-                else:
-                    log_file_path = LOGS_DIR / path_obj
+                # Если путь абсолютный (например, /tmp/log.txt) — берем его.
+                # Если относительный (например, "my_func.log") — кладем в корень/logs/
+                log_file_path = path_obj if path_obj.is_absolute() else LOGS_DIR / path_obj
 
-                # Создаем папку непосредственно перед записью
+                # Это создаст папку logs в корне, если её вдруг удалили
                 log_file_path.parent.mkdir(exist_ok=True, parents=True)
 
             def write_log(message: str) -> None:

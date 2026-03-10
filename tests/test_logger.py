@@ -2,7 +2,10 @@ import logging
 
 import pytest
 
-from src.utils.logging_config import logger
+from src.utils.logging_config import setup_logger
+
+
+logger = setup_logger('test_logger', level_console=logging.INFO)  # или DEBUG, смотря что просит ассерт
 
 
 def test_logger_basic():
@@ -44,7 +47,7 @@ def test_console_handler_level():
 def test_file_handler_level():
     """Проверяет, что файловый обработчик настроен на уровень DEBUG."""
     for handler in logger.handlers:
-        if isinstance(handler, logging.handlers.RotatingFileHandler):  # Ищем файловый обработчик
+        if isinstance(handler, logging.FileHandler):  # Ищем файловый обработчик
             assert handler.level == logging.DEBUG
             return
     pytest.fail('Консольный обработчик не найден')

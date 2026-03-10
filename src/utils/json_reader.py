@@ -2,11 +2,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from src.decorators.log_decorator import log
-from src.utils.logging_config import logger
+from src.utils.logging_config import setup_logger
 
 
-@log()
+logger = setup_logger('json_reader')
+
+
+# @log()
 def read_transactions_from_json(file_path: str) -> list[dict[str, Any]]:
     """
     Читает JSON‑файл с транзакциями и возвращает список словарей.
@@ -31,24 +33,19 @@ def read_transactions_from_json(file_path: str) -> list[dict[str, Any]]:
             # Проверка типа данных
             if isinstance(data, list):
                 result = data
-                logger.info(f'Успешно прочитано {len(result)} транзакций из {file_path}')
+                # ИСПРАВЛЕНО (G004): убрали f-строку, заменили на %s
+                logger.info('Успешно прочитано %s транзакций из %s', len(result), path.name)
             else:
                 logger.error('Данные в файле не являются списком: %s', file_path)
 
-        except json.JSONDecodeError as e:
-            logger.error('Ошибка парсинга JSON в файле %s: %s', file_path, e)
+        except json.JSONDecodeError:
+            # ИСПРАВЛЕНО (TRY400): заменили error на exception
+            logger.exception('Ошибка парсинга JSON в файле %s', file_path)
         except PermissionError:
-            logger.error('Нет доступа к файлу: %s', file_path)
+            logger.exception('Нет доступа к файлу: %s', file_path)
         except UnicodeDecodeError:
-            logger.error('Неподдерживаемая кодировка в файле: %s', file_path)
-        except OSError as e:
-            logger.error('Ошибка ОС при чтении файла %s: %s', file_path, e)
+            logger.exception('Неподдерживаемая кодировка в файле: %s', file_path)
+        except OSError:
+            logger.exception('Ошибка ОС при чтении файла %s', file_path)
 
     return result
-
-
-if __name__ == '__main__':
-    # Пример использования функции
-    file_path = '/home/alexs/project/PyCharm/linux_9.2_HW/data/operations.json'
-    transactions = read_transactions_from_json(file_path)
-    print(transactions)
