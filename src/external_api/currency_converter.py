@@ -116,9 +116,3 @@ def convert_to_rub(
                 logger.warning('Невозможно преобразовать amount в число: %s. ID: %s', amount, transaction_id or 'N/A')
 
     return result
-
-
-if __name__ == '__main__':
-    # Пример вызова функции
-    result = convert_to_rub('100', 'USD', 'tx_123')
-    print(f'Результат: {result} RUB')

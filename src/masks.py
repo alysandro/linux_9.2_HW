@@ -41,9 +41,3 @@ def get_mask_account(acc_number: str) -> str:
     masked = f'{"**"} {acc_number[-4:]}'
     logger.info('Маскирование счета успешно завершено')
     return masked
-
-
-if __name__ == '__main__':
-    print(get_mask_card_number('1234567812345678'))
-    print(get_mask_account('73654108430135874305'))
-    print(get_mask_account('73'))

@@ -49,15 +49,3 @@ def read_transactions_from_json(file_path: str) -> list[dict[str, Any]]:
             logger.exception('Ошибка ОС при чтении файла %s', file_path)
 
     return result
-
-
-if __name__ == '__main__':
-    file_path = '/home/alexs/project/PyCharm/linux_9.2_HW/data/operations.json'
-
-    try:
-        transactions = read_transactions_from_json(file_path)
-        print(f'Успешно обработано: {len(transactions)} транзакций')
-    except Exception:
-        # Вот здесь магия: запишет в файл json_reader.log подробный traceback
-        # Метод .exception сам "подхватит" ошибку и добавит трейсбек
-        logger.exception('Произошла критическая ошибка')
