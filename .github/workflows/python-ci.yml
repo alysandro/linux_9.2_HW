@@ -2,7 +2,7 @@ name: Python Poetry CI
 
 on:
   push:
-    branches: [main, develop, homework_12_2]
+    branches: [main, develop, Feature_homework_13_1]
   pull_request:
     branches: [main, develop]
 
