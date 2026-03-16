@@ -1,3 +1,5 @@
+[![Python Poetry CI](https://github.com/alysandro/linux_9.2_HW/actions/workflows/python-ci.yml/badge.svg?branch=develop)](https://github.com/alysandro/linux_9.2_HW/actions/workflows/python-ci.yml)
+[![Ruff](https://github.com/alysandro/linux_9.2_HW/actions/workflows/ruff.yml/badge.svg?branch=Feature%2Fhomework_13_1)](https://github.com/alysandro/linux_9.2_HW/actions/workflows/ruff.yml)
 
 # Финансовый анализатор транзакций
 
