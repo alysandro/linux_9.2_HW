@@ -6,21 +6,28 @@ on:
   pull_request:
     branches: [main, develop]
 
+permissions:
+  contents: read  # для чтения кода (всегда нужно)
+  checks: write   # для отправки результатов тестов
+  pull-requests: write  # если workflow комментирует PR или обновляет статус
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 #v5
         with:
           python-version: '3.12'
 
       - name: Install Poetry
-        uses: snok/install-poetry@v1
+        uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a #v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
@@ -29,7 +36,7 @@ jobs:
       # Кэширование зависимостей ускорит сборку в 2-3 раза
       - name: Load cached venv
         id: cached-poetry-dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 #v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
@@ -65,7 +72,7 @@ jobs:
         run: poetry run pytest --cov=src --cov-fail-under=80 --cov-report=xml
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de #v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
