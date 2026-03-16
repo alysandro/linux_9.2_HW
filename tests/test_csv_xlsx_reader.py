@@ -11,8 +11,8 @@ from src.utils.xlsx_reader import load_transactions_from_xlsx
 @pytest.fixture
 def temp_csv(tmp_path):
     file_path = tmp_path / 'test.csv'
-    df = pd.DataFrame([{'id': 1, 'amount': 100}, {'id': 2, 'amount': 200}])
-    df.to_csv(file_path, index=False)
+    csv_df = pd.DataFrame([{'id': 1, 'amount': 100}, {'id': 2, 'amount': 200}])
+    csv_df.to_csv(file_path, index=False)
     return file_path
 
 
@@ -20,8 +20,8 @@ def temp_csv(tmp_path):
 @pytest.fixture
 def temp_xlsx(tmp_path):
     file_path = tmp_path / 'test.xlsx'
-    df = pd.DataFrame([{'id': 3, 'amount': 300}])
-    df.to_excel(file_path, index=False)
+    xlsx_df = pd.DataFrame([{'id': 3, 'amount': 300}])
+    xlsx_df.to_excel(file_path, index=False)
     return file_path
 
 
@@ -67,9 +67,19 @@ def test_load_xlsx_file_not_found():
     assert result == []
 
 
-# 3. Тест на критическую ошибку (симуляция битого файла)
-def test_load_csv_critical_error():
+def test_load_csv_critical_error(temp_csv):
     with patch('pandas.read_csv') as mock_read:
-        mock_read.side_effect = Exception('Boom!')  # Симулируем взрыв при чтении
-        result = load_transactions_from_csv('transactions.csv')
-        assert result == []
+        mock_read.side_effect = Exception('Boom!')
+        # Подменяем DATA_DIR на временную папку с файлом
+        with patch('src.utils.csv_reader.DATA_DIR', temp_csv.parent):
+            result = load_transactions_from_csv('test.csv')
+    assert result == []
+
+
+def test_load_xlsx_critical_error(temp_xlsx):
+    with patch('pandas.read_excel') as mock_read:
+        mock_read.side_effect = Exception('Boom!')
+        # Подменяем DATA_DIR на временную папку с файлом
+        with patch('src.utils.xlsx_reader.DATA_DIR', temp_xlsx.parent):
+            result = load_transactions_from_xlsx('test.xlsx')
+    assert result == []

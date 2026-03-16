@@ -36,14 +36,11 @@ def load_transactions_from_csv(file_name: str) -> list[dict]:
 
     try:
         logger.info('Читаем файл: %s', csv_path.name)
+        csv_df = pd.read_csv(csv_path, sep=None, engine='python')
+        logger.info('Успешно прочитано %s транзакций из %s', len(csv_df), csv_path.name)
+        return csv_df.to_dict('records')  # Приводим к списку словарей для единообразия с JSON
 
-        df = pd.read_csv(csv_path, sep=None, engine='python')
-
-        logger.info('Успешно прочитано %s транзакций из %s', len(df), csv_path.name)
-
-        return df.to_dict('records')  # Приводим к списку словарей для единообразия с JSON
-
-    except (FileNotFoundError, OSError, ValueError):
+    except Exception:
         # Ловим только ошибки, связанные с файлами или неверным форматом Excel
         logger.exception(
             'Ошибка при чтении CSV файла: %s',

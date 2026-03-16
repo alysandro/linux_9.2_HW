@@ -42,18 +42,18 @@ def load_transactions_from_xlsx(file_name: str) -> list[dict]:
             xlsx_path.name,
         )
         # Читаем Excel. Параметр engine='openpyxl' рекомендуется для .xlsx
-        df = pd.read_excel(xlsx_path)
+        xlsx_df = pd.read_excel(xlsx_path)
 
         logger.info(
             'Успешно прочитано %s транзакций из %s',
-            len(df),
+            len(xlsx_df),
             xlsx_path.name,
         )
 
         # Возвращаем список словарей
-        return df.to_dict('records')
+        return xlsx_df.to_dict('records')
 
-    except (FileNotFoundError, OSError, ValueError):
+    except Exception:
         # Ловим только ошибки, связанные с файлами или неверным форматом Excel
         logger.exception(
             'Ошибка при чтении Excel файла: %s',
