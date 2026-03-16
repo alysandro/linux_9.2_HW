@@ -109,6 +109,7 @@ line-ending = "lf"
     "S105", # Possible hardcoded password
     "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
     "ARG", # Unused method argument
+    "PLR2004",
 ]
 
 [tool.ruff.lint.flake8-quotes]
