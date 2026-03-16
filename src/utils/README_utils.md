@@ -14,30 +14,28 @@
 ## Структура проекта
 
 ```python
-linux_9.2_HW/
-├── data/
-│ └── operations.json # файл с транзакциями
-├── logs/
-│ └── app.log # логи приложения
-├── src/
-│ ├── decorators/
-│ │ └── log_decorator.py # декоратор логирования
-│ ├── utils/
-│ │ ├── json_reader.py # чтение JSON
-│ │ ├── currency_converter.py # конвертация валют
-│ │ ├── logging_config.py # настройка логгера
-│ │ ├── constants.py # константы
-│ │ └──README_utils.md
-│ └── main.py # точка входа
-├── tests/
-│ ├── test_json_reader.py # тесты для чтения JSON
-│ ├── test_currency_converter.py # тесты для конвертации
-│ └── test_logger.py # тесты логгера
-├── .env # переменные окружения
-├── .env.template # шаблон .env
-├── pyproject.toml # конфигурация проекта
-├── requirements.txt # зависимости
-└── README.md
+
+project/
+├── logs/                  # Директория с логами (.log файлы)
+├── src/                   # Исходный код проекта
+│   ├── decorators/        # Декораторы (логирование вызовов функций)
+│   ├── external_api/      # Интеграция с внешними API (конвертация валют)
+│   ├── utils/             # Вспомогательные модули
+│   │   ├── constants.py   # Централизованные константы и пути
+│   │   ├── logging_config.py # Универсальная настройка логгеров
+│   │   ├── json_reader.py # Чтение транзакций из JSON
+│   │   ├── csv_reader.py  # Чтение транзакций из CSV
+│   │   └── xlsx_reader.py # Чтение транзакций из Excel
+│   ├── generators.py      # Генераторы для обработки транзакций
+│   ├── masks.py           # Функции маскирования карт и счетов
+│   ├── processing.py      # Фильтрация и сортировка данных
+│   └── widget.py          # Основная логика виджета
+├── tests/                 # Тестовая библиотека (pytest)
+│   ├── test_logger.py     # Тесты системы логирования
+│   ├── test_json_reader.py # Тесты чтения JSON
+│   └── ...                # Остальные тесты модулей
+├── .env                   # Конфигурация окружения
+└── README.md              # Документация проекта
 ```
 
 ## Настройка и запуск
