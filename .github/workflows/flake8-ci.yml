@@ -37,14 +37,18 @@ jobs:
         run: |
 #Выполняем проверку с детализацией
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-#Создаём директорию для отчётов
-           mkdir -p test-reports/flake8 #Сохраняем полный вывод в файл
-           flake8 . --output-file=test-reports/flake8/flake8.txt --exit-zero #Конвертируем в JUnit XML
+     #Создаём директорию для отчётов
+           mkdir -p test-reports/flake8
+     #Сохраняем полный вывод в файл
+           flake8 . --output-file=test-reports/flake8/flake8.txt --exit-zero 
+
+     #Конвертируем в JUnit XML
            flake8_junit test-reports/flake8/flake8.txt test-reports/flake8/flake8_junit.xml
 
           
       - name: Upload JUnit report
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4  #refs/tags/v5
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4  
+        #refs/tags/v5
         with:
           name: flake8-report
           path: test-reports/flake8/flake8_junit.xml
