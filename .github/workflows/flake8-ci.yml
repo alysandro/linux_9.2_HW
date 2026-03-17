@@ -26,9 +26,24 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8
+          pip install flake8 flake8-junit-report
 
       - name: Run Flake8
         run: |
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --exit-zero  # Для предотвращения падения workflow при ошибках
+
+      - name: Run Flake8 and generate report
+        run: |
+          # Создаём директорию для отчётов (если её нет)
+          mkdir -p test-reports/flake8
+          # Запускаем Flake8 и сохраняем вывод в файл
+          flake8 . --output-file=test-reports/flake8/flake8.txt
+          # Конвертируем текстовый отчёт в JUnit XML
+          flake8_junit test-reports/flake8/flake8.txt test-reports/flake8/flake8_junit.xml
+
+      - name: Upload JUnit report
+        uses: actions/upload-artifact@ff15f0306b3f739f7b6fd43fb5d26cd321bd4de5  #v3
+        with:
+          name: flake8-report
+          path: test-reports/flake8/flake8_junit.xml
