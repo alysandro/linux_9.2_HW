@@ -1,0 +1,50 @@
+name: Run Flake8
+
+on:
+  push:
+    branches: [main, develop, Feature_homework_13_1]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    permissions:  
+#Добавили этот блок
+      contents: read  
+#Только чтение репозитория
+      packages: read  
+#Только чтение пакетов (если используется)
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 #v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 #v5
+        with:
+          python-version: '3.12' 
+#Укажите нужную версию Python
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip flake8 flake8-junit-report
+
+      - name: Run Flake8 and generate report
+        run: | 
+          echo "Working directory: $(pwd)"
+          # Проверка с детализацией
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics #Создаём директорию для отчётов
+          mkdir -p test-reports/flake8 #Сохраняем полный вывод в файл
+          flake8 . --output-file=test-reports/flake8/flake8.txt --exit-zero #Конвертируем в JUnit XML
+          flake8_junit test-reports/flake8/flake8.txt test-reports/flake8/flake8_junit.xml
+
+          
+      - name: Upload JUnit report
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4  
+        #refs/tags/v5
+        with:
+          name: flake8-report
+          path: test-reports/flake8/flake8_junit.xml
+          retention-days: 30
+   

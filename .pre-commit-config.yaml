@@ -4,11 +4,27 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace      # Удаляет лишние пробелы в конце строк
-      - id: end-of-file-fixer         # Добавляет пустую строку в конце файла
+      - id: end-of-file-fixer        # Добавляет пустую строку в конце файла
       - id: check-yaml               # Проверяет синтаксис YAML-файлов
       - id: debug-statements         # Ищет забытые pdb.set_trace()
+      - id: pretty-format-json
+        args: [--autofix, --no-ensure-ascii, --no-sort-keys]
 
-  # 2. Ruff — заменяет Black, Flake8, Isort, Pyupgrade и Add-trailing-comma
+  # 2. Проверка Poetry (путь исправлен)
+  - repo: https://github.com/python-poetry/poetry
+    rev: 2.0.1  # Версия хуков (чуть отличается от версии программы)
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+
+  # 3. Проверка безопасности (Safety вынесен отдельно)
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.0  # Актуальная версия
+    hooks:
+      - id: bandit
+        args: ["-iii", "-ll"] # Проверка только серьезных уязвимостей
+
+  # 4. Ruff — заменяет Black, Flake8, Isort, Pyupgrade и Add-trailing-comma
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.11
     hooks:
@@ -16,7 +32,7 @@ repos:
         args: [ --fix ]      # Исправляет ошибки автоматически
       - id: ruff-format      # Форматирование кода (замена Black)
 
-  # 3. Mypy — проверка типов (через локальную установку Poetry)
+  # 5. Mypy — проверка типов (через локальную установку Poetry)
   - repo: local
     hooks:
       - id: mypy
@@ -25,3 +41,9 @@ repos:
         language: system
         types: [python]
         pass_filenames: false
+
+
+  - repo: https://github.com/woodruffw/zizmor-pre-commit
+    rev: v1.22.0
+    hooks:
+      - id: zizmor

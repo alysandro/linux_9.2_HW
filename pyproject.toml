@@ -6,7 +6,7 @@ description = "Домашнее задание по курсу Linux"
 authors = [{ name = "ALEXANDR_SH", email = "sandro.86@bk.ru" }]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["requests (>=2.32.5,<3.0.0)", "python-decouple (==3.8)", "json-log-formatter (>=1.1.1,<2.0.0)", "colorlog (>=6.10.1,<7.0.0)"] # Основные зависимости приложения (библиотеки)
+dependencies = ["requests (>=2.32.5,<3.0.0)", "python-decouple (==3.8)", "json-log-formatter (>=1.1.1,<2.0.0)", "colorlog (>=6.10.1,<7.0.0)", "pandas[excel] (>=3.0.1,<4.0.0)"] # Основные зависимости приложения (библиотеки)
 
 [tool.poetry]
 # Настройки специфичные для пакетного менеджера Poetry
@@ -29,6 +29,8 @@ pytest = "^9.0.2"
 covdefaults = "^2.3.0"
 pytest-cov = "^7.0.0" # Добавьте это (актуальная версия на 2026)
 poethepoet = "^0.40.0"
+mypy = "^1.19.1"
+pandas-stubs = "^3.0.0.260204"
 
 [build-system]
 # Настройки сборки пакета
@@ -107,6 +109,7 @@ line-ending = "lf"
     "S105", # Possible hardcoded password
     "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
     "ARG", # Unused method argument
+    "PLR2004",
 ]
 
 [tool.ruff.lint.flake8-quotes]
