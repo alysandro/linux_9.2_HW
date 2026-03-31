@@ -13,8 +13,8 @@ permissions:
 jobs:
   ruff:
     runs-on: ubuntu-latest
-    env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+#    env:
+#      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       # 1. Клонируем репозиторий со всей историей
       - name: Checkout code
