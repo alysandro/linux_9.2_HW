@@ -1,6 +1,10 @@
 name: Ruff
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, develop, Feature_homework_13_2]
+  pull_request:
+    branches: [main, develop]
 
 # Разрешаем Actions записывать изменения в репозиторий
 permissions:

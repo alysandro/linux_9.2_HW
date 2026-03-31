@@ -2,7 +2,7 @@ name: Run Flake8
 
 on:
   push:
-    branches: [main, develop, Feature_homework_13_1]
+    branches: [main, develop, Feature_homework_13_2]
   pull_request:
     branches: [main, develop]
 
