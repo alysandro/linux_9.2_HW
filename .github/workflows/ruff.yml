@@ -16,7 +16,7 @@ jobs:
     steps:
       # 1. Клонируем репозиторий со всей историей
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -43,7 +43,7 @@ jobs:
 
       # 4. Коммитим изменения, если Ruff что-то поправил
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v7
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "style: fix lint and format with ruff"
           file_pattern: .
