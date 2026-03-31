@@ -45,7 +45,7 @@ jobs:
 
       # 4. Коммитим изменения, если Ruff что-то поправил
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 #v6
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "style: fix lint and format with ruff"
           file_pattern: .
