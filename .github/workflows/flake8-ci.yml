@@ -17,12 +17,12 @@ jobs:
 #Только чтение пакетов (если используется)
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 #Укажите нужную версию Python
@@ -41,8 +41,7 @@ jobs:
 
 
       - name: Upload JUnit report
-        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4
-        #refs/tags/v5
+        uses: actions/upload-artifact@v5
         with:
           name: flake8-report
           path: test-reports/flake8/flake8_junit.xml

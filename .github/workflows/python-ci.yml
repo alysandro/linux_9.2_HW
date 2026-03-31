@@ -36,7 +36,7 @@ jobs:
       # Кэширование зависимостей ускорит сборку в 2-3 раза
       - name: Load cached venv
         id: cached-poetry-dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 #v4
+        uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
@@ -48,7 +48,9 @@ jobs:
 
       - name: Verify installation
         run: |
-          poetry run python -c "import colorlog; import decouple; print('✅ Зависимости в порядке')"
+          poetry run python -c "import colorlog; import decouple; print(
+          '✅ Зависимости в порядке'
+          )"
 
       - name: Run Type Check (Mypy)
         run: poetry run mypy src
