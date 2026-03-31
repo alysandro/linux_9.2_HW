@@ -13,12 +13,10 @@ permissions:
 jobs:
   ruff:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       # 1. Клонируем репозиторий со всей историей
       - name: Checkout code
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
           fetch-depth: 0
