@@ -9,6 +9,9 @@ permissions:
 jobs:
   ruff:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       # 1. Клонируем репозиторий со всей историей
       - name: Checkout code
