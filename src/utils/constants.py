@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 from typing import Final
 
@@ -18,3 +19,18 @@ DEFAULT_LOG_FORMAT: Final[str] = 'color'
 DEFAULT_LOG_LEVEL: Final[str] = 'DEBUG'
 MAX_LOG_SIZE: Final[int] = 10 * 1024 * 1024  # 10 МБ
 DEFAULT_BACKUP_COUNT: Final[int] = 5
+
+# Уровни логирования — строковые константы
+LOG_LEVELS: Final[dict[str, int]] = {
+    'DEBUG': logging.DEBUG,
+    'INFO': logging.INFO,
+    'WARNING': logging.WARNING,
+    'ERROR': logging.ERROR,
+    'CRITICAL': logging.CRITICAL,
+}
+
+# Форматы логов
+LOG_FORMATS_CONFIG: Final[dict[str, str]] = {
+    'plain': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    'json': '{"time": "%(asctime)s", "logger": "%(name)s", "level": "%(levelname)s", "message": "%(message)s"}',
+}

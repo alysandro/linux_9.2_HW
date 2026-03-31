@@ -4,11 +4,10 @@ import logging
 import pandas as pd
 
 from src.utils.constants import DATA_DIR
-from src.utils.logging_config import setup_logger
+from src.utils.logging_config import get_module_logger
 
 
-# 1. Настраиваем именованный логгер для Excel
-logger = setup_logger('xlsx_reader')
+logger = get_module_logger('xlsx_reader')
 
 # Регистрируем корректное завершение
 atexit.register(logging.shutdown)
@@ -60,16 +59,3 @@ def load_transactions_from_xlsx(file_name: str) -> list[dict]:
             xlsx_path.name,
         )
         return []
-
-
-if __name__ == '__main__':
-    # 1. Тестируем современный формат .xlsx
-    xlsx_data = load_transactions_from_xlsx('transactions_excel.xlsx')
-    if xlsx_data:
-        # Используем f-строку для вывода первых двух записей
-        print(f'Тестовый запуск XLSX: прочитано {len(xlsx_data)} строк. Примеры: {xlsx_data[:2]}')
-
-    # 2. Тестируем старый формат .xls (если он есть в папке data)
-    xls_data = load_transactions_from_xlsx('operations.xls')
-    if xls_data:
-        print(f'Тестовый запуск XLS: прочитано {len(xls_data)} строк. Примеры: {xls_data[:2]}')

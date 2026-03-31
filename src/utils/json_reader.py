@@ -2,10 +2,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from src.utils.logging_config import setup_logger
+from src.utils.logging_config import get_module_logger
 
 
-logger = setup_logger('json_reader')
+logger = get_module_logger('json_reader')
 
 
 # @log()

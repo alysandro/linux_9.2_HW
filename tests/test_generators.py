@@ -20,7 +20,7 @@ def test_filter_by_currency_full_coverage():
         {'operationAmount': {}, 'id': 4},
         # 5. currency не словарь
         {'operationAmount': {'currency': 'not_dict'}, 'id': 5},
-        # 6. Нет code
+        # 6. Нет
         {'operationAmount': {'currency': {}}, 'id': 6},
         # 7. Другая валюта
         {'operationAmount': {'currency': {'code': 'EUR'}}, 'id': 7},

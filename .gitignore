@@ -171,6 +171,7 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+ignore_files/
 
 # Pyre type checker
 .pyre/
@@ -203,6 +204,7 @@ cython_debug/
 
 # Ruff stuff:
 .ruff_cache/
+.ignore_files/
 
 # PyPI configuration file
 .pypirc

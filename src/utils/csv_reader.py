@@ -4,11 +4,13 @@ import logging
 import pandas as pd
 
 from src.utils.constants import DATA_DIR
-from src.utils.logging_config import setup_logger
+from src.utils.logging_config import get_module_logger
 
+
+logger = get_module_logger('masks')
 
 # 1. Настраиваем именованный логгер
-logger = setup_logger('csv_reader')
+logger = get_module_logger('csv_reader')
 
 # Регистрируем корректное завершение (необязательно, но полезно для сложных систем)
 atexit.register(logging.shutdown)
