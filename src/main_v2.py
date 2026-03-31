@@ -48,7 +48,7 @@ class SortOrder(Enum):
 def get_sort_key(op: dict[str, Any]) -> datetime:
     date_str = op.get('date', '')
     parsed = parse_date(date_str)
-    return parsed if parsed else datetime.min.replace(tzinfo=UTC)
+    return parsed or datetime.min.replace(tzinfo=UTC)
 
 
 def sort_by_date(data: list[dict[str, Any]], order: SortOrder = SortOrder.ASCENDING) -> list[dict[str, Any]]:
