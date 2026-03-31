@@ -1,10 +1,6 @@
 name: Ruff
 
-on:
-  push:
-    branches: [main, develop, Feature_homework_13_2]
-  pull_request:
-    branches: [main, develop]
+on: [push, pull_request, Feature_homework_13_2]
 
 # Разрешаем Actions записывать изменения в репозиторий
 permissions:
@@ -13,10 +9,12 @@ permissions:
 jobs:
   ruff:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       # 1. Клонируем репозиторий со всей историей
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -43,7 +41,7 @@ jobs:
 
       # 4. Коммитим изменения, если Ruff что-то поправил
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 #v6
         with:
           commit_message: "style: fix lint and format with ruff"
           file_pattern: .
