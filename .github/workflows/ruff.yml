@@ -1,10 +1,6 @@
 name: Ruff
 
-on:
-  push:
-    branches: [main, develop, Feature_homework_13_2]
-  pull_request:
-    branches: [main, develop]
+on: [push, pull_request]
 
 # Разрешаем Actions записывать изменения в репозиторий
 permissions:
@@ -13,8 +9,6 @@ permissions:
 jobs:
   ruff:
     runs-on: ubuntu-latest
-#    env:
-#      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
       # 1. Клонируем репозиторий со всей историей
       - name: Checkout code
