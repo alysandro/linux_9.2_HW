@@ -51,9 +51,9 @@ def test_read_transactions_from_json_success(tmp_path):
 
 def test_load_transactions_from_xlsx_success(tmp_path):
     """Тест успешного чтения Excel."""
-    df = pd.DataFrame({'id': [1], 'amount': [100.0]})
+    from_xlsx_df = pd.DataFrame({'id': [1], 'amount': [100.0]})
     xlsx_file = tmp_path / 'test.xlsx'
-    df.to_excel(xlsx_file, index=False)
+    from_xlsx_df.to_excel(xlsx_file, index=False)
 
     with patch('src.utils.file_loader.DATA_DIR', tmp_path):
         result = load_transactions_from_xlsx('test.xlsx')
@@ -78,9 +78,9 @@ def test_load_transactions_from_csv_success(tmp_path):
     """Тест успешной загрузки CSV."""
     # Создаем временный CSV файл
     d = {'id': [1, 2], 'amount': [100.0, 200.0]}
-    df = pd.DataFrame(data=d)
+    from_csv_sdf = pd.DataFrame(data=d)
     csv_file = tmp_path / 'test_data.csv'
-    df.to_csv(csv_file, index=False)
+    from_csv_sdf.to_csv(csv_file, index=False)
 
     # Подменяем DATA_DIR, чтобы функция искала файл в tmp_path
     with patch('src.utils.file_loader.DATA_DIR', tmp_path):
