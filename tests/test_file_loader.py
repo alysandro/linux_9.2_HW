@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from unittest.mock import patch
 
 import pandas as pd
@@ -10,6 +11,21 @@ from src.utils.file_loader import (
     load_transactions_from_xlsx,
     read_transactions_from_json,
 )
+
+
+def test_read_transactions_from_json_error(tmp_path):
+    """Тест ошибки чтения JSON (битый файл)."""
+    invalid_file = tmp_path / 'invalid.json'
+    invalid_file.write_text("{'broken': json}")  # Некорректный JSON
+    # Строка 117-118 будет покрыта
+    assert read_transactions_from_json(str(invalid_file)) == []
+
+
+def test_load_transactions_from_xlsx_not_found():
+    """Тест случая, когда Excel файл не найден."""
+    # Строка 105 будет покрыта
+    with patch('src.utils.file_loader.DATA_DIR', Path('/non/existent')):
+        assert load_transactions_from_xlsx('missing.xlsx') == []
 
 
 def test_normalize_dict_keys_with_non_str_keys():
