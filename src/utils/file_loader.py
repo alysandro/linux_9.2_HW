@@ -1,3 +1,4 @@
+import _csv
 import json
 from pathlib import Path
 from typing import Any
@@ -59,7 +60,7 @@ def load_transactions_from_csv(file_name: str) -> list[dict[str, Any]]:
         logger.exception('CSV‑файл пуст: %s', csv_path.name)
         return []
 
-    except pd.errors.ParserError:
+    except (pd.errors.ParserError, _csv.Error):
         logger.exception('Ошибка парсинга CSV: %s', csv_path.name)
         return []
 

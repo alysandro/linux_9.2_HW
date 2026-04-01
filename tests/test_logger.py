@@ -2,10 +2,15 @@ import logging
 
 import pytest
 
-from src.utils.logging_config import setup_logger
+from src.utils.logging_config import LoggerConfig, setup_logger
 
 
-logger = setup_logger('test_logger', level_console=logging.INFO)  # или DEBUG, смотря что просит ассерт
+# Создание конфигурации
+config = LoggerConfig(name='my_app', level_file='DEBUG', level_console='INFO', log_format='color')
+
+
+# Инициализация логгера
+logger = setup_logger(config)
 
 
 def test_logger_basic():
