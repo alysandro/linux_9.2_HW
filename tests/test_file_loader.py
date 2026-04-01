@@ -4,11 +4,18 @@ from unittest.mock import patch
 import pandas as pd
 
 from src.utils.file_loader import (
+    _normalize_dict_keys,
     _validate_file,
     load_transactions_from_csv,
     load_transactions_from_xlsx,
     read_transactions_from_json,
 )
+
+
+def test_normalize_dict_keys_with_non_str_keys():
+    data = [{1: 'a', 2: 'b'}]
+    result = _normalize_dict_keys(data)
+    assert result == [{'1': 'a', '2': 'b'}]
 
 
 def test_load_xlsx_empty(tmp_path):
