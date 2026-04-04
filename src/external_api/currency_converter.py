@@ -7,10 +7,10 @@ from decouple import config
 import requests
 
 from src.decorators.log_decorator import log
-from src.utils.logging_config import setup_logger
+from src.utils.logging_config import get_module_logger
 
 
-logger = setup_logger('currency_converter')
+logger = get_module_logger('currency_converter')
 
 
 class RequestParams(TypedDict, total=False):

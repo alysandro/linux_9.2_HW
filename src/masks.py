@@ -1,10 +1,19 @@
 from __future__ import annotations
 
-from src.utils.logging_config import setup_logger
+from src.utils.logging_config import get_module_logger
 
 
-# Создаем персональный логгер для этого модуля
-logger = setup_logger('masks')
+logger = get_module_logger('masks')
+
+
+def apply_masks(data: list[dict]) -> list[dict]:
+    """Применяет маскировку к списку операций."""
+    for item in data:
+        if 'account' in item:
+            item['account'] = get_mask_account(item['account'])
+        if 'card' in item:
+            item['card'] = get_mask_card_number(item['card'])
+    return data
 
 
 def get_mask_card_number(card: str) -> str:

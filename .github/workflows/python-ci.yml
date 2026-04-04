@@ -2,7 +2,7 @@ name: Python Poetry CI
 
 on:
   push:
-    branches: [main, develop, Feature_homework_13_1]
+    branches: [main, develop, Feature_homework_13_2]
   pull_request:
     branches: [main, develop]
 
@@ -17,12 +17,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 #v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -36,7 +36,7 @@ jobs:
       # Кэширование зависимостей ускорит сборку в 2-3 раза
       - name: Load cached venv
         id: cached-poetry-dependencies
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 #v4
+        uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
@@ -48,7 +48,9 @@ jobs:
 
       - name: Verify installation
         run: |
-          poetry run python -c "import colorlog; import decouple; print('✅ Зависимости в порядке')"
+          poetry run python -c "import colorlog; import decouple; print(
+          '✅ Зависимости в порядке'
+          )"
 
       - name: Run Type Check (Mypy)
         run: poetry run mypy src
